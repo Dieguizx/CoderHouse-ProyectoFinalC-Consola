@@ -36,6 +36,7 @@ namespace PROYECTO_FINAL_C
             return usuario;
         }
 
+        //// Inicio Sesión - recibe usuario y contraseña y devuelve objeto usuario
         public static Usuario Login(string nombreUsuario, string password)
         {
             Usuario usuarioMatch = new Usuario();
