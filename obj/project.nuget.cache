@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4I0ek9nDioqEZVH2ZnJVlwkES4X0p0Cfd3Uoemz1gQES5eeC5c0nN4BDBpT69IgkOTlxuor4a9NBbUH+LD16iA==",
+  "dgSpecHash": "E+ZmdHPA6VxyS8jlNV+hw2ixR2bS8+sZCsjMezzPwVXDUncFrO50z+BvQkhokg8n2idfe65Q9RBuJH3M5UcOFQ==",
   "success": true,
-  "projectFilePath": "D:\\DEVELOPER\\C#\\CODERHOUSE\\TRABAJO_FINAL\\PROYECTO_FINAL_C\\PROYECTO_FINAL_C.csproj",
+  "projectFilePath": "D:\\DEVELOPER\\C#\\CODERHOUSE\\TRABAJO_FINAL\\Coderhouse-ProyectoFinalC\\PROYECTO_FINAL_C.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diego Allende\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Diego Allende\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

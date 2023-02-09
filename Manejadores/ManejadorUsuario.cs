@@ -12,7 +12,7 @@ namespace PROYECTO_FINAL_C
         // Cadena de Conexión
         public static string cadenaConexion = "Data Source=DESKTOP-7QBII56\\SQLEXPRESS;Initial Catalog=SistemaGestion;Integrated Security=True";
 
-        // Obtener un usuario dado el id del usuario
+        // OBTENER USUARIO POR ID
         public static Usuario ObtenerUsuario(long id)
         {
             Usuario usuario = new Usuario();
@@ -36,7 +36,44 @@ namespace PROYECTO_FINAL_C
             return usuario;
         }
 
-        //// Inicio Sesión - recibe usuario y contraseña y devuelve objeto usuario
+        // INSERTAR USUARIO - OK
+        public static int InsertarUsuario(Usuario usuario)
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("INSERT INTO Usuario (Nombre, Apellido, NombreUsuario, Contraseña, Mail)" +
+                    "VALUES (@nombre, @apellido, @nombreUsuario, @password, @mail)", conn);
+                comando.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                comando.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                comando.Parameters.AddWithValue("@nombreUsuario", usuario.NombreUsuario);
+                comando.Parameters.AddWithValue("@password", usuario.Password);
+                comando.Parameters.AddWithValue("@mail", usuario.Mail);
+                conn.Open();
+                return comando.ExecuteNonQuery();
+            }
+        }
+
+        // ACTUALIZAR USUARIO - OK
+        public static int UpdateUsuario(Usuario usuario)
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("UPDATE Usuario " +
+                    " SET Nombre = @nombre, Apellido = @apellido, " +
+                    " NombreUsuario = @nombreUsuario, Contraseña = @password," +
+                    " Mail = @mail WHERE Id = @id", conn);
+                comando.Parameters.AddWithValue("@id", usuario.Id);
+                comando.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                comando.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                comando.Parameters.AddWithValue("@nombreUsuario", usuario.NombreUsuario);
+                comando.Parameters.AddWithValue("@password", usuario.Password);
+                comando.Parameters.AddWithValue("@mail", usuario.Mail);
+                conn.Open();
+                return comando.ExecuteNonQuery();
+            }
+        }
+
+        // LOGUIN USUARIO
         public static Usuario Login(string nombreUsuario, string password)
         {
             Usuario usuarioMatch = new Usuario();
@@ -68,3 +105,5 @@ namespace PROYECTO_FINAL_C
         }
     }
 }
+
+

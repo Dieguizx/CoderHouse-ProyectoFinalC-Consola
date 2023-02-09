@@ -12,20 +12,16 @@ namespace PROYECTO_FINAL_C
         // Cadena de Conexión
         public static string cadenaConexion = "Data Source=DESKTOP-7QBII56\\SQLEXPRESS;Initial Catalog=SistemaGestion;Integrated Security=True";
 
-        // Obtener un producto dado el id del producto
+        // OBTENER PRODUCTO - OK
         public static Producto ObtenerProducto(long id)
         {
             Producto producto = new Producto();
-
-            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
             {
-                SqlCommand comando = new SqlCommand("SELECT * FROM Producto WHERE Id = @id", conexion);
-
-                comando.Parameters.AddWithValue("@id", id);
-
-                conexion.Open();
-
-                SqlDataReader reader = comando.ExecuteReader();
+                SqlCommand comando2 = new SqlCommand("SELECT * FROM Producto WHERE Id = @id", conn);
+                comando2.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                SqlDataReader reader = comando2.ExecuteReader();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -39,7 +35,96 @@ namespace PROYECTO_FINAL_C
             }
             return producto;
         }
-        // Traer Productos - recibe un id de usuario y devuelve lista productos cargados por ese usuario
+
+        // INSERTAR PRODUCTO - OK
+        public static int InsertarProducto(Producto producto)
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("INSERT INTO Producto(Descripciones, Costo, PrecioVenta, Stock, IdUsuario)" +
+                    "VALUES(@descripciones, @costo, @precioVenta, @stock, @idUsuario)", conn);
+                comando.Parameters.AddWithValue("@descripciones", producto.Descripciones);
+                comando.Parameters.AddWithValue("@costo", producto.Costo);
+                comando.Parameters.AddWithValue("@precioVenta", producto.PrecioVenta);
+                comando.Parameters.AddWithValue("@stock", producto.Stock);
+                comando.Parameters.AddWithValue("@idUsuario", producto.IdUsuario);
+                conn.Open();
+                return comando.ExecuteNonQuery();
+
+            }
+        }
+
+        // ELIMINAR PRODUCTO - falta resolver
+        public static int DeleteProducto(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                try
+                {
+                    SqlCommand comando = new SqlCommand("DELETE FROM Producto" +
+                        " WHERE id=@id", conn);
+                    comando.Parameters.AddWithValue("@id", id);
+                    conn.Open();
+                    return comando.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("" + ex.Message);
+                    return -1;
+
+                }
+            }
+        }
+
+        // ACTUALIZAR PRODUCTO - OK
+        public static int UpdateProducto(Producto producto)
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("UPDATE Producto " +
+                    "SET Descripciones=@descripciones," +
+                    "Costo=@costo, PrecioVenta=@precioVenta," +
+                    "Stock=@stock, IdUsuario=@idUsuario " +
+                    "WHERE Id=@id", conn);
+                comando.Parameters.AddWithValue("@id", producto.Id);
+                comando.Parameters.AddWithValue("@descripciones", producto.Descripciones);
+                comando.Parameters.AddWithValue("@costo", producto.Costo);
+                comando.Parameters.AddWithValue("@precioVenta", producto.PrecioVenta);
+                comando.Parameters.AddWithValue("@stock", producto.Stock);
+                comando.Parameters.AddWithValue("@idUsuario", producto.IdUsuario);
+                conn.Open();
+                return comando.ExecuteNonQuery();
+            }
+        }
+
+        // OBTENER LISTA DE PRODUCTOS - OK  
+        public static List<Producto> ObtenerProductos()
+        {
+            List<Producto> productos = new List<Producto>();
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("SELECT * FROM Producto", conn);
+                conn.Open();
+                SqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Producto productoTemporal = new Producto();
+                        productoTemporal.Id = reader.GetInt64(0);
+                        productoTemporal.Descripciones = reader.GetString(1);
+                        productoTemporal.Costo = reader.GetDecimal(2);
+                        productoTemporal.PrecioVenta = reader.GetDecimal(3);
+                        productoTemporal.Stock = reader.GetInt32(4);
+                        productoTemporal.IdUsuario = reader.GetInt64(5);
+                        productos.Add(productoTemporal);
+                    }
+                }
+                return productos;
+            }
+        }
+
+        // OBTENER LISTA PRODUCTOS RECIBE ID USUARIO
         public static List<Producto> ObtenerProductosCargados(long idUsuario)
         {
             List<long> productoCargado = new List<long>();
@@ -65,36 +150,6 @@ namespace PROYECTO_FINAL_C
                 listaProductosCargados.Add(productoTempporal);
             }
             return listaProductosCargados;
-        }
-
-        // Traer Productos Vendidos - recibe id de usuario y devuelve una lista de productos vendidos por ese usuario
-        public static List<Producto> ObtenerProductosVendidos(long idUsuario)
-        {
-            List<long> idProductos = new List<long>();
-            using (SqlConnection conn = new SqlConnection(cadenaConexion))
-            {
-                SqlCommand comando2 = new SqlCommand("SELECT IdProducto FROM Venta" +
-                    " INNER JOIN ProductoVendido" +
-                    " ON Venta.Id = ProductoVendido.IdVenta" +
-                    " WHERE IdUsuario = @idUsuario", conn);
-                comando2.Parameters.AddWithValue("@idUsuario", idUsuario);
-                conn.Open();
-                SqlDataReader reader = comando2.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        idProductos.Add(reader.GetInt64(0));
-                    }
-                }
-            }
-            List<Producto> productos = new List<Producto>();
-            foreach (var id in idProductos)
-            {
-                Producto prodTemp = ObtenerProducto(id);
-                productos.Add(prodTemp);
-            }
-            return productos;
         }
     }
 }

@@ -1,35 +1,134 @@
-﻿namespace PROYECTO_FINAL_C
+﻿
+
+namespace PROYECTO_FINAL_C
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            //// Traer Usuario - recibe id usuario
-            //Usuario usuario = ManejadorUsuario.ObtenerUsuario(1);
-            //Console.WriteLine(usuario.Nombre);
+            // **PRODUCTO**
 
-            //// Traer Productos - recibe un id de usuario y devuelve lista productos cargados por ese usuario
+            // OBTENER PRODUCTO POR ID - OK
+
+            //Producto producto = ManejadorProducto.ObtenerProducto(1);
+            //Console.WriteLine(producto.Descripciones);
+
+            // INSERTAR UN PRODUCTO - OK
+
+            //Producto productoAInsertar = new Producto();
+            //productoAInsertar.Descripciones = "Producto Prueba";
+            //productoAInsertar.Costo = 90;
+            //productoAInsertar.PrecioVenta = 160;
+            //productoAInsertar.Stock = 10;
+            //productoAInsertar.IdUsuario = 3;
+            //if (ManejadorProducto.InsertarProducto(productoAInsertar) >= 1)
+            //{
+            //    Console.WriteLine("Producto Insertado");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No se pudo insertar el producto");
+            //}
+
+            // ELIMINAR PRODUCTO - FALTA RESOLVER CUANDO EL PRODUCTO ESTA EN TABLA PRODUCTOVENDIDO
+
+            //int verificador = ManejadorProducto.DeleteProducto(1);
+            //if (verificador < 1)
+            //{
+            //    Console.WriteLine("Hubo un problema al eliminar");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Se elimino correctamente");
+            //}
+
+            // ACTUALIZAR PRODUCTO - OK
+
+            //Producto productoUpdate = new Producto();
+            //productoUpdate.Id = 1;
+            //productoUpdate.Descripciones = "Remera Musculosa";
+            //productoUpdate.Costo = 400;
+            //productoUpdate.PrecioVenta = 600;
+            //productoUpdate.Stock = 40;
+            //productoUpdate.IdUsuario = 3;
+            //if (ManejadorProducto.UpdateProducto(productoUpdate) >= 1)
+            //{
+            //    Console.WriteLine("Producto Actualizado");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Producto no fue actualizado");
+            //}
+
+            // OBTENER LISTA DE PRODUCTOS - OK
+
+            //List<Producto> listaProductos = ManejadorProducto.ObtenerProductos();
+            //foreach (var producto in listaProductos)
+            //{
+            //    Console.WriteLine(producto.Descripciones);
+            //}
+
+            //// OBTENER LISTA DE PRODUCTOS RECIBE ID USUARIO - OK
             //List<Producto> productos = ManejadorProducto.ObtenerProductosCargados(3);
             //foreach (var item in productos)
             //{
             //    Console.WriteLine(item.Descripciones);
             //}
 
-            //// Traer Productos Vendidos - recibe un id de usuario y devuelve una lista de productos vendidos por ese usuario 
-            //List<Producto> productos = ManejadorProducto.ObtenerProductosVendidos(1);
+            // **PRODUCTO VENDIDO**
+
+            // OBTENER LISTA PRODUCTOS VENDIDOS POR ID USUARIO
+
+            //List<Producto> productos = ManejadorProductoVendido.ObtenerProductosVendidos(3);
             //foreach (var item in productos)
             //{
             //    Console.WriteLine(item.Descripciones);
             //}
 
-            //// Traer Ventas - recibe un id de usuario y devuelve lista ventas realizadas por ese usuario
-            //List<Venta> ventas = ManejadorVentas.ObtenerVentas(1);
-            //foreach (var item in ventas)
+            // **USUARIO**
+
+            // OBTENER USUARIO POR ID
+
+            //Usuario usuario = ManejadorUsuario.ObtenerUsuario(1);
+            //Console.WriteLine(usuario.Nombre);
+
+            // INSERTAR UN USUARIO
+
+            //Usuario usuarioIngresado = new Usuario();
+            //usuarioIngresado.Nombre = "Pepito";
+            //usuarioIngresado.Apellido = "El Sapito";
+            //usuarioIngresado.NombreUsuario = "sapitoPepe";
+            //usuarioIngresado.Password = "123456";
+            //usuarioIngresado.Mail = "pepito@mail.com";
+            //if (ManejadorUsuario.InsertarUsuario(usuarioIngresado) >= 1)
             //{
-            //    Console.WriteLine(item.Id);
+            //    Console.WriteLine("Usuario Ingresado");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No se pudo ingresar el usuario");
             //}
 
-            //// Inicio Sesión - recibe usuario y contraseña y devuelve objeto usuario
+            // ACTUALIZAR USUARIO - OK
+
+            //Usuario usuarioUpdate = new Usuario();
+            //usuarioUpdate.Id = 1;
+            //usuarioUpdate.Nombre = "Alejandro";
+            //usuarioUpdate.Apellido = "Merle";
+            //usuarioUpdate.NombreUsuario = "alemer";
+            //usuarioUpdate.Password = "123456";
+            //usuarioUpdate.Mail = "ale@mail.com";
+            //if (ManejadorUsuario.UpdateUsuario(usuarioUpdate) >= 1)
+            //{
+            //    Console.WriteLine("Usuario Actualizado");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Usuario no fue actualizado");
+            //}
+
+            // LOGUIN USUARIO - OK
+
             //Console.WriteLine("Ingrese usuario: ");
             //string nombreUsuario;
             //nombreUsuario = Console.ReadLine();
@@ -38,6 +137,16 @@
             //password = Console.ReadLine();
             //Usuario usuario = ManejadorUsuario.Login(nombreUsuario, password);
             //Console.WriteLine(usuario.Nombre + " " + usuario.Apellido);
+
+            // **VENTA**
+
+            // OBTENER VENTAS RECIBE ID USUARIO - PULIR QUERY, SOLO TRAE ID VENTA
+
+            //List<Venta> ventas = ManejadorVentas.ObtenerVentas(1);
+            //foreach (var item in ventas)
+            //{
+            //    Console.WriteLine(item.Id);
+            //}
         }
     }
 }

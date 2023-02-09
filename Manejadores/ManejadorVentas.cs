@@ -12,7 +12,7 @@ namespace PROYECTO_FINAL_C
         // Cadena de Conexión
         public static string cadenaConexion = "Data Source=DESKTOP-7QBII56\\SQLEXPRESS;Initial Catalog=SistemaGestion;Integrated Security=True";
 
-        // Obtener una venta dado el id de la venta
+        // OBTENER VENTA POR ID
         public static Venta ObtenerVenta(long id)
         {
             Venta venta = new Venta();
@@ -34,7 +34,7 @@ namespace PROYECTO_FINAL_C
             return venta;
         }
 
-        // Traer Ventas - recibe un id de usuario y devuelve lista ventas realizadas por ese usuario
+        // OBTENER LISTA VENTAS RECIBE ID USUARIO
         public static List<Venta> ObtenerVentas(long idUsuario)
         {
             List<long> ventaRealizada = new List<long>();
