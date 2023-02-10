@@ -30,9 +30,8 @@ namespace PROYECTO_FINAL_C
             //    Console.WriteLine("No se pudo insertar el producto");
             //}
 
-            // ELIMINAR PRODUCTO - FALTA RESOLVER CUANDO EL PRODUCTO ESTA EN TABLA PRODUCTOVENDIDO
-
-            //int verificador = ManejadorProducto.DeleteProducto(1);
+            // ELIMINAR PRODUCTO - OK
+            //int verificador = ManejadorProducto.DeleteProducto(4);
             //if (verificador < 1)
             //{
             //    Console.WriteLine("Hubo un problema al eliminar");

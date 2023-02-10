@@ -50,28 +50,28 @@ namespace PROYECTO_FINAL_C
                 comando.Parameters.AddWithValue("@idUsuario", producto.IdUsuario);
                 conn.Open();
                 return comando.ExecuteNonQuery();
-
             }
         }
 
-        // ELIMINAR PRODUCTO - falta resolver
-        public static int DeleteProducto(int id)
+        // ELIMINAR PRODUCTO - OK
+        public static int DeleteProducto(long id)
         {
-            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
             {
                 try
                 {
-                    SqlCommand comando = new SqlCommand("DELETE FROM Producto" +
-                        " WHERE id=@id", conn);
-                    comando.Parameters.AddWithValue("@id", id);
-                    conn.Open();
-                    return comando.ExecuteNonQuery();
+                    SqlCommand comando = new SqlCommand($"DELETE FROM ProductoVendido WHERE IdProducto = @id", conexion);
+                    SqlCommand comando1 = new SqlCommand($"DELETE FROM Producto WHERE Id=@id", conexion);
+                    conexion.Open();
+                    comando.Parameters.AddWithValue("id", id);
+                    comando1.Parameters.AddWithValue("id", id); 
+                    comando.ExecuteNonQuery();
+                    return comando1.ExecuteNonQuery();
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    Console.WriteLine("" + ex.Message);
+                    Console.WriteLine("" + e.Message);
                     return -1;
-
                 }
             }
         }
